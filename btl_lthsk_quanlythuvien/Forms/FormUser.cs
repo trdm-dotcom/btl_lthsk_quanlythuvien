@@ -11,7 +11,6 @@ namespace btl_lthsk_quanlythuvien.Forms
     public partial class FormUser : Form
     {
         string connectionString = ConfigurationManager.ConnectionStrings["db_btlthsk"].ConnectionString;
-        SqlCommand cmd;
         DataTable dt;
 
         public FormUser()
@@ -32,19 +31,67 @@ namespace btl_lthsk_quanlythuvien.Forms
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                con.Open();
                 try
                 {
-                    
                     if (btnAdd.Tag==null)
                     {
-                        insert(con);
+                        if (!hastext(txtName.Text) || !hastext(txtPassword.Text))
+                        {
+                            MessageBox.Show("Nhập lại thông tin");
+                            return;
+                        }
+                        string name = txtName.Text.Trim();
+                        string password = cryptPassword(txtPassword.Text.Trim(), GenerateSalt());
+                        string id = createId();
+                        SqlCommand cmd = new SqlCommand("insertTT", con);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@matt", SqlDbType.NVarChar).Value = id;
+                        cmd.Parameters.Add("@hoten", SqlDbType.NVarChar).Value = name;
+                        cmd.Parameters.Add("@matkhau", SqlDbType.VarChar).Value = password;
+                        cmd.Parameters.Add("@maquyen", SqlDbType.Int).Value = 2;
+                        con.Open();
+                        int rowCount = cmd.ExecuteNonQuery();
+                        if (rowCount > 0)
+                        {
+                            dt.Rows.Add(new Object[] { id, name });
+                            dt.AcceptChanges();
+                            dgvUser.DataSource = dt;
+                            clear();
+                        }
                     }
                     else
                     {
-                        update(con, btnAdd.Tag.ToString());
+                        if (!hastext(txtName.Text))
+                        {
+                            MessageBox.Show("Nhập lại thông tin");
+                            return;
+                        }
+                        string id = btnAdd.Tag.ToString();
+                        string name = txtName.Text.Trim();
+                        string password = "";
+                        if (hastext(txtPassword.Text))
+                        {
+                            password = cryptPassword(txtPassword.Text.Trim(), GenerateSalt());
+                        }
+                        SqlCommand cmd = new SqlCommand("updateTT", con);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@matt", SqlDbType.NVarChar).Value = id;
+                        cmd.Parameters.Add("@hoten", SqlDbType.NVarChar).Value = name;
+                        cmd.Parameters.Add("@matkhau", SqlDbType.VarChar).Value = password;
+                        con.Open();
+                        int rowCount = cmd.ExecuteNonQuery();
+                        if (rowCount > 0)
+                        {
+                            DataRow[] rows = dt.Select(String.Format("sMaTT = '{0}'", id));
+                            foreach (DataRow row in rows)
+                            {
+                                row["sTenTT"] = name;
+                            }
+                            dt.AcceptChanges();
+                            dgvUser.DataSource = dt;
+                            clear();
+                        }
                     }
-                    
                 }
                 catch (SqlException ex)
                 {
@@ -81,14 +128,12 @@ namespace btl_lthsk_quanlythuvien.Forms
             {
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    con.Open();
                     try
                     {
-                        cmd = new SqlCommand("DELETE tblThuthu WHERE sMaTT = @matt", con);
+                        SqlCommand cmd = new SqlCommand("DELETE tblThuthu WHERE sMaTT = @matt", con);
                         cmd.CommandType = CommandType.Text;
-                        SqlParameter idParam = new SqlParameter("@matt", SqlDbType.NVarChar);
-                        idParam.Value = id;
-                        cmd.Parameters.Add(idParam);
+                        cmd.Parameters.Add("@matt", SqlDbType.NVarChar).Value = id;
+                        con.Open();
                         int rowCount = cmd.ExecuteNonQuery();
                         if (rowCount > 0)
                         {
@@ -122,80 +167,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             }
         }
 
-        private void insert(SqlConnection con)
-        {
-            if (!hastext(txtName.Text) || !hastext(txtPassword.Text))
-            {
-                MessageBox.Show("Nhập lại thông tin");
-                return;
-            }
-            string name = txtName.Text.Trim();
-            string password = cryptPassword(txtPassword.Text.Trim(), GenerateSalt());
-            cmd = new SqlCommand("SELECT COUNT(*) FROM tblThuthu", con);
-            cmd.CommandType = CommandType.Text;
-            var count = int.Parse(cmd.ExecuteScalar().ToString()) + 1;
-            string id = createId(count);
-            cmd = new SqlCommand("insertTT", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlParameter idParam = new SqlParameter("@matt", SqlDbType.NVarChar);
-            idParam.Value = id;
-            cmd.Parameters.Add(idParam);
-            SqlParameter nameParam = new SqlParameter("@hoten", SqlDbType.NVarChar);
-            nameParam.Value = name;
-            cmd.Parameters.Add(nameParam);
-            SqlParameter passwordParam = new SqlParameter("@matkhau", SqlDbType.VarChar);
-            passwordParam.Value = password;
-            cmd.Parameters.Add(passwordParam);
-            SqlParameter permissionParam = new SqlParameter("@maquyen", SqlDbType.Int);
-            permissionParam.Value = 2;
-            cmd.Parameters.Add(permissionParam);
-            int rowCount = cmd.ExecuteNonQuery();
-            if (rowCount > 0)
-            {
-                dt.Rows.Add(new Object[] { id, name });
-                dt.AcceptChanges();
-                dgvUser.DataSource = dt;
-                clear();
-            }
-        }
-
-        private void update(SqlConnection con, string id)
-        {
-            if (!hastext(txtName.Text)){
-                MessageBox.Show("Nhập lại thông tin");
-                return;
-            }
-            string name = txtName.Text.Trim();
-            string password = "";
-            if (hastext(txtPassword.Text))
-            {
-                password = cryptPassword(txtPassword.Text.Trim(), GenerateSalt());
-            }
-            cmd = new SqlCommand("updateTT", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlParameter idParam = new SqlParameter("@matt", SqlDbType.NVarChar);
-            idParam.Value = id;
-            cmd.Parameters.Add(idParam);
-            SqlParameter nameParam = new SqlParameter("@hoten", SqlDbType.NVarChar);
-            nameParam.Value = name;
-            cmd.Parameters.Add(nameParam);
-            SqlParameter passwordParam = new SqlParameter("@matkhau", SqlDbType.VarChar);
-            passwordParam.Value = password;
-            cmd.Parameters.Add(passwordParam);
-            int rowCount = cmd.ExecuteNonQuery();
-            if (rowCount > 0)
-            {
-                DataRow[] rows = dt.Select(String.Format("sMaTT = '{0}'", id));
-                foreach (DataRow row in rows)
-                {
-                    row["sTenTT"] = name;
-                }
-                dt.AcceptChanges();
-                dgvUser.DataSource = dt;
-                clear();
-            }
-        }
-
         private void clear()
         {
             txtName.Clear();
@@ -207,15 +178,37 @@ namespace btl_lthsk_quanlythuvien.Forms
             return !string.IsNullOrEmpty(text) && !string.IsNullOrWhiteSpace(text);
         }
 
-        private string createId(int count)
+        private string createId()
         {
-            string id = "TT";
-            for(int i = 0; i < 8 - count.ToString().Length; i++)
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
-                id += String.Format("{0}", 0);
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM tblThuthu", con);
+                    cmd.CommandType = CommandType.Text;
+                    con.Open();
+                    var count = int.Parse(cmd.ExecuteScalar().ToString()) + 1;
+                    string id = "TT";
+                    for (int i = 0; i < 8 - count.ToString().Length; i++)
+                    {
+                        id += String.Format("{0}", 0);
+                    }
+                    id += String.Format("{0}", count);
+                    return id;
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception("Error in sql" + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error" + ex.Message);
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
-            id += String.Format("{0}", count);
-            return id;
         }
 
         private string cryptPassword(string password,string salt)
@@ -264,11 +257,11 @@ namespace btl_lthsk_quanlythuvien.Forms
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                con.Open();
                 try
                 {
-                    cmd = new SqlCommand("SELECT sMaTT,sTenTT FROM tblThuthu ORDER BY sTenTT ASC", con);
+                    SqlCommand cmd = new SqlCommand("SELECT sMaTT,sTenTT FROM tblThuthu ORDER BY sTenTT ASC", con);
                     cmd.CommandType = System.Data.CommandType.Text;
+                    con.Open();
                     SqlDataReader data = cmd.ExecuteReader();
                     dt = new DataTable();
                     dt.Load(data);

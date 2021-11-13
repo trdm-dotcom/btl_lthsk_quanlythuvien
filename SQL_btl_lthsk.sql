@@ -24,11 +24,9 @@ create proc insertTT
 @maquyen int
 as
 Begin
-	SET NOCOUNT ON;
 	Begin TRAN
 		Begin TRY
 			insert into tblThuthu(sMaTT,sTenTT,sMatkhau,iQuyen) values(@matt,@hoten,@matkhau,@maquyen)
-			
 			COMMIT TRANSACTION
 		End Try
 	Begin CATCH
@@ -42,10 +40,9 @@ create proc updateTT
 @matkhau varchar(255)
 as
 Begin
-	SET NOCOUNT ON;
 	Begin TRAN
 		Begin TRY
-			IF @matkhau IS NULL
+			IF @matkhau IS NULL or @matkhau = ''
 				UPDATE tblThuthu SET sTenTT = @hoten WHERE sMaTT = @matt
 			ELSE
 				UPDATE tblThuthu SET sTenTT = @hoten, sMatkhau = @matkhau WHERE sMaTT = @matt
