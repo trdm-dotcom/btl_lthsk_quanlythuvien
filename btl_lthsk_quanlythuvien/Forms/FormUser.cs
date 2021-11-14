@@ -12,7 +12,6 @@ namespace btl_lthsk_quanlythuvien.Forms
     {
         string connectionString = ConfigurationManager.ConnectionStrings["db_btlthsk"].ConnectionString;
         DataTable dt;
-
         public FormUser()
         {
             InitializeComponent();

@@ -2,9 +2,11 @@ ALTER TABLE tblSach ALTER COLUMN sTenS nvarchar(255);
 ALTER TABLE tblSinhvien ALTER COLUMN sTenSV nvarchar(255);
 ALTER TABLE tblThuthu ALTER COLUMN sTenTT nvarchar(255);
 ALTER TABLE tblTheloai ALTER COLUMN sTenL nvarchar(255);
+ALTER TABLE tblSinhvien ALTER COLUMN sLop varchar(10);
 ALTER TABLE tblPhieumuon ADD iTrangthai int
 ALTER TABLE tblThuthu ADD sMatkhau varchar(255)
 ALTER TABLE tblThuthu ADD iQuyen int
+ALTER TABLE tblSinhvien ADD iTrangthai int
 
 
 create table tblTaikhoan(
@@ -58,7 +60,6 @@ create proc insertTheloai
 @tentl nvarchar(255)
 as
 Begin
-	SET NOCOUNT ON;
 	Begin TRAN
 		Begin TRY
 			insert into tblTheloai (sMaL,sTenL) values(@matl,@tentl)
@@ -76,7 +77,6 @@ create proc insertSach
 @sl int
 as
 Begin
-	SET NOCOUNT ON;
 	Begin TRAN
 		Begin TRY
 			insert into tblSach (sMaS,sTenS,sMaL,iSoLuong) values(@mas,@tens,@mal,@sl)
@@ -93,11 +93,60 @@ Begin
 	SELECT * FROM tblTheloai
 End
 
-create proc getSinhvien
+create proc insertSV
+@masv nvarchar(10),
+@tensv nvarchar(255),
+@lop varchar(10),
+@trangthai int
 as
 Begin
-	SELECT tblSinhvien.* FROM tblSinhvien
-	left join tblPhieumuon
-	on tblSinhvien.sMaSV = tblPhieumuon.sMaSV
-	ORDER BY sTenSV ASC
+	Begin TRAN
+		Begin TRY
+			insert into tblSinhvien (sMaSV,sTenSV,sLop,iTrangthai) values(@masv,@tensv,@lop,@trangthai)
+			COMMIT TRANSACTION
+		End Try
+	Begin CATCH
+		ROLLBACK TRANSACTION
+	End CATCH
 End
+
+create proc updateSV
+@masv nvarchar(10),
+@tensv nvarchar(255),
+@lop varchar(10)
+as
+Begin
+	Begin TRAN
+		Begin TRY
+			update tblSinhvien set sTenSV = @tensv,sLop = @lop where sMaSV = @masv
+			COMMIT TRANSACTION
+		End Try
+	Begin CATCH
+		ROLLBACK TRANSACTION
+	End CATCH
+End
+
+create proc getStudent
+as
+Begin
+	SELECT sMaSV,sTenSV,sLop, 
+	CASE 
+		WHEN iTrangthai = 0 THEN 'Khóa'
+		ELSE ''
+	END AS trangthai
+	FROM tblSinhvien ORDER BY sTenSV, sLop ASC
+End
+
+create proc bandStudent
+@masv nvarchar(10)
+as
+Begin
+	Begin TRAN
+		Begin TRY
+			update tblSinhvien set iTrangthai = 0 Where sMaSV = @masv
+			COMMIT TRANSACTION
+		End Try
+	Begin CATCH
+		ROLLBACK TRANSACTION
+	End CATCH
+END

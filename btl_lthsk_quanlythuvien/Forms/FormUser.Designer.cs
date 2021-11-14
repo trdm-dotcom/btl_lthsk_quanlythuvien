@@ -31,6 +31,8 @@ namespace btl_lthsk_quanlythuvien.Forms
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvUser = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -39,8 +41,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             this.SuspendLayout();
@@ -77,6 +77,24 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvUser.ReadOnly = true;
             this.dgvUser.Size = new System.Drawing.Size(344, 160);
             this.dgvUser.TabIndex = 8;
+            this.dgvUser.AutoGenerateColumns = false;
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "sMaTT";
+            this.colId.HeaderText = "ID";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            this.colId.Width = 200;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "sTenTT";
+            this.colName.HeaderText = "Họ tên";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 150;
             // 
             // btnAdd
             // 
@@ -140,7 +158,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(39, 56);
+            this.label2.Location = new System.Drawing.Point(22, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 16);
             this.label2.TabIndex = 3;
@@ -176,23 +194,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.label1.Size = new System.Drawing.Size(186, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Thông tin thủ thư";
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "sMaTT";
-            this.colId.HeaderText = "ID";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            this.colId.Width = 200;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "sTenTT";
-            this.colName.HeaderText = "Họ tên";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 150;
             // 
             // FormUser
             // 

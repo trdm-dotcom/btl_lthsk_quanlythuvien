@@ -65,7 +65,7 @@ namespace btl_lthsk_quanlythuvien
 
         private void btnStudent_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new Forms.FormStudents(), sender);
+            OpenChildForm(new Forms.FormStudent(), sender);
         }
 
         private void btnBook_Click(object sender, EventArgs e)
