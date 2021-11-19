@@ -1,6 +1,8 @@
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\bin\Debug\btl_lthsk_quanlythuvien.exe.config
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\bin\Debug\btl_lthsk_quanlythuvien.exe
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\bin\Debug\btl_lthsk_quanlythuvien.pdb
+C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.Forms.FormLibrary.resources
+C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.Forms.FormStudent.resources
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.Forms.FormUser.resources
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.MainForm.resources
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.Properties.Resources.resources
@@ -9,4 +11,3 @@ C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\D
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.exe
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.pdb
 C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.csproj.AssemblyReference.cache
-C:\Users\minh\source\repos\btl_lthsk_quanlythuvien\btl_lthsk_quanlythuvien\obj\Debug\btl_lthsk_quanlythuvien.Forms.FormStudent.resources

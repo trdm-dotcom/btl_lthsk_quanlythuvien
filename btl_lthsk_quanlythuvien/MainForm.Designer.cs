@@ -162,7 +162,7 @@ namespace btl_lthsk_quanlythuvien
             this.panelDesktop.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.panelDesktop.Location = new System.Drawing.Point(190, 0);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(818, 561);
+            this.panelDesktop.Size = new System.Drawing.Size(842, 561);
             this.panelDesktop.TabIndex = 1;
             // 
             // MainForm
@@ -171,7 +171,7 @@ namespace btl_lthsk_quanlythuvien
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.ClientSize = new System.Drawing.Size(1032, 561);
             this.Controls.Add(this.panelDesktop);
             this.Controls.Add(this.panelMenu);
             this.Name = "MainForm";

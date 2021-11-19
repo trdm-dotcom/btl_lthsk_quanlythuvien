@@ -70,7 +70,7 @@ namespace btl_lthsk_quanlythuvien
 
         private void btnBook_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new Forms.FormBook(), sender);
+            OpenChildForm(new Forms.FormLibrary(), sender);
         }
 
         private void btnCard_Click(object sender, EventArgs e)

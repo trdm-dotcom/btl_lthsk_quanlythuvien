@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace btl_lthsk_quanlythuvien.Forms
 {
     partial class FormStudent
@@ -29,6 +31,7 @@ namespace btl_lthsk_quanlythuvien.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvStudent = new System.Windows.Forms.DataGridView();
             this.txtId = new System.Windows.Forms.TextBox();
@@ -63,7 +66,10 @@ namespace btl_lthsk_quanlythuvien.Forms
             // 
             this.dgvStudent.AllowUserToAddRows = false;
             this.dgvStudent.AllowUserToDeleteRows = false;
-            this.dgvStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStudent.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvStudent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvStudent.ColumnHeadersHeight = 37;
+            this.dgvStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvStudent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName,
@@ -72,8 +78,19 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvStudent.Location = new System.Drawing.Point(275, 53);
             this.dgvStudent.Name = "dgvStudent";
             this.dgvStudent.ReadOnly = true;
-            this.dgvStudent.Size = new System.Drawing.Size(408, 230);
+            this.dgvStudent.EnableHeadersVisualStyles = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStudent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvStudent.Size = new System.Drawing.Size(415, 230);
             this.dgvStudent.TabIndex = 2;
+            this.dgvStudent.BorderStyle = BorderStyle.None;
+            this.dgvStudent.AutoGenerateColumns = false;
             // 
             // txtId
             // 
@@ -201,7 +218,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.colClass.HeaderText = "Lớp";
             this.colClass.Name = "colClass";
             this.colClass.ReadOnly = true;
-            this.colClass.Width = 90;
             // 
             // colStatus
             // 

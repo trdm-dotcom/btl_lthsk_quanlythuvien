@@ -8,7 +8,6 @@ ALTER TABLE tblThuthu ADD sMatkhau varchar(255)
 ALTER TABLE tblThuthu ADD iQuyen int
 ALTER TABLE tblSinhvien ADD iTrangthai int
 
-
 create table tblTaikhoan(
 	sMaTK nvarchar(10) NOT NULL,
 	sTaikhoan nvarchar(255) NOT NULL UNIQUE,
@@ -150,3 +149,30 @@ Begin
 		ROLLBACK TRANSACTION
 	End CATCH
 END
+
+create proc getSach
+as
+Begin
+	Select sMaS, sTenS, iSoLuong, tblTheloai.sMaL, sTenL,
+		(Select count(tblPhieumuon.sMaPhieu) from tblPhieumuonchitiet 
+		inner join tblPhieumuon 
+		on tblPhieumuonchitiet.sMaPhieu = tblPhieumuon.sMaPhieu
+		where tblPhieumuonchitiet.sMaS = tblSach.sMaS and tblPhieumuon.iTrangthai = 0) as duocmuon
+	from tblSach 
+	inner join tblTheloai
+	on tblSach.sMaL = tblTheloai.sMaL
+	ORDER BY sTenS, sTenL ASC
+End
+
+create proc getPhieumuonBySach
+@mas nvarchar(10)
+as
+Begin
+	Select sTenSV,tblPhieumuon.sMaPhieu, dNgayMuon
+	from tblSinhvien
+	inner join tblPhieumuon
+	on tblSinhvien.sMaSV = tblPhieumuon.sMaSV
+	inner join tblPhieumuonchitiet
+	on tblPhieumuon.sMaPhieu = tblPhieumuonchitiet.sMaPhieu
+	where sMaS = @mas
+End
