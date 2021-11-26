@@ -1,3 +1,4 @@
+
 ALTER TABLE tblSach ALTER COLUMN sTenS nvarchar(255);
 ALTER TABLE tblSinhvien ALTER COLUMN sTenSV nvarchar(255);
 ALTER TABLE tblThuthu ALTER COLUMN sTenTT nvarchar(255);
@@ -175,4 +176,12 @@ Begin
 	inner join tblPhieumuonchitiet
 	on tblPhieumuon.sMaPhieu = tblPhieumuonchitiet.sMaPhieu
 	where sMaS = @mas
+End
+
+create proc doLogin
+@matt nvarchar(10),
+@pass varchar(255)
+as
+Begin
+	Select * from tblThuthu where sMaTT = @matt and sMatkhau = @pass
 End

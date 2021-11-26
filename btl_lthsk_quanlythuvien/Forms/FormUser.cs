@@ -28,19 +28,19 @@ namespace btl_lthsk_quanlythuvien.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (!hastext(txtName.Text) || !hastext(txtPassword.Text))
+            {
+                MessageBox.Show("Nhập lại thông tin");
+                return;
+            }
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
                     if (btnAdd.Tag==null)
                     {
-                        if (!hastext(txtName.Text) || !hastext(txtPassword.Text))
-                        {
-                            MessageBox.Show("Nhập lại thông tin");
-                            return;
-                        }
                         string name = txtName.Text.Trim();
-                        string password = cryptPassword(txtPassword.Text.Trim(), GenerateSalt());
+                        string password = cryptPassword(txtPassword.Text.Trim());
                         string id = createId();
                         SqlCommand cmd = new SqlCommand("insertTT", con);
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -70,7 +70,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                         string password = "";
                         if (hastext(txtPassword.Text))
                         {
-                            password = cryptPassword(txtPassword.Text.Trim(), GenerateSalt());
+                            password = cryptPassword(txtPassword.Text.Trim());
                         }
                         SqlCommand cmd = new SqlCommand("updateTT", con);
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -183,10 +183,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM tblThuthu", con);
-                    cmd.CommandType = CommandType.Text;
-                    con.Open();
-                    var count = int.Parse(cmd.ExecuteScalar().ToString()) + 1;
+                    var count = dt.Rows.Count + 1;
                     string id = "TT";
                     for (int i = 0; i < 8 - count.ToString().Length; i++)
                     {
@@ -210,7 +207,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             }
         }
 
-        private string cryptPassword(string password,string salt)
+        private string cryptPassword(string password)
         {
             string cryptPassword    = null;
             password                = EncodeToBase64(password);
@@ -218,9 +215,8 @@ namespace btl_lthsk_quanlythuvien.Forms
             {
                 try
                 {
-                    byte[] hashByte = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(string.Concat(salt, password)));
-                    cryptPassword = String.Format("{0}${1}${2}"
-                        ,salt.Length,salt,Convert.ToBase64String(hashByte));
+                    byte[] hashByte = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                    cryptPassword = Convert.ToBase64String(hashByte);
                 }
                 catch (Exception ex)
                 {
@@ -228,14 +224,6 @@ namespace btl_lthsk_quanlythuvien.Forms
                 }
             }
             return cryptPassword;
-        }
-
-        public string GenerateSalt()
-        {
-            var bytes   = new byte[16];
-            var rng     = new RNGCryptoServiceProvider();
-            rng.GetBytes(bytes);
-            return Convert.ToBase64String(bytes);
         }
 
         private string EncodeToBase64(string password)

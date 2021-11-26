@@ -36,7 +36,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvUser = new System.Windows.Forms.DataGridView();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -86,8 +85,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
-            this.colName,
-            this.colAction});
+            this.colName});
             this.dgvUser.EnableHeadersVisualStyles = false;
             this.dgvUser.Location = new System.Drawing.Point(284, 53);
             this.dgvUser.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
@@ -95,7 +93,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvUser.ReadOnly = true;
             this.dgvUser.Size = new System.Drawing.Size(344, 160);
             this.dgvUser.TabIndex = 8;
-            this.dgvUser.AutoGenerateColumns = false;
             // 
             // colId
             // 
@@ -113,13 +110,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
             this.colName.Width = 200;
-            // 
-            // colAction
-            // 
-            this.colAction.HeaderText = "Tác vụ";
-            this.colAction.Name = "colAction";
-            this.colAction.ReadOnly = true;
-            this.colAction.Width = 155;
             // 
             // btnAdd
             // 
@@ -250,8 +240,7 @@ namespace btl_lthsk_quanlythuvien.Forms
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dgvUser;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAction;
+        private DataGridViewTextBoxColumn colId;
+        private DataGridViewTextBoxColumn colName;
     }
 }

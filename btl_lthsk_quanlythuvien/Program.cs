@@ -15,7 +15,7 @@ namespace btl_lthsk_quanlythuvien
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new FormLogin());
         }
     }
 }

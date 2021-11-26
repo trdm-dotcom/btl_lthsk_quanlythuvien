@@ -17,6 +17,7 @@ namespace btl_lthsk_quanlythuvien.Forms
         DataTable dtBook;
         DataTable dtType;
         SqlCommand cmd;
+        String select = "";
         public FormLibrary()
         {
             InitializeComponent();
@@ -35,19 +36,22 @@ namespace btl_lthsk_quanlythuvien.Forms
 
         private void btnAddType_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtNameType.Text))
+            {
+                MessageBox.Show("Nhập tên thể loại");
+                return;
+            }
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
-                    con.Open();
-                    cmd = new SqlCommand("SELECT COUNT(*) FROM tblTheloai", con);
-                    cmd.CommandType = CommandType.Text;
-                    var count = int.Parse(cmd.ExecuteScalar().ToString()) + 1;
+                    var count = dtType.Rows.Count + 1;
                     string id = String.Format("TL{0}", createId(count));
                     cmd = new SqlCommand("insertTheloai", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@matl", SqlDbType.NVarChar).Value = id;
                     cmd.Parameters.Add("@tentl", SqlDbType.NVarChar).Value = txtNameType.Text;
+                    con.Open();
                     int rowCount = cmd.ExecuteNonQuery();
                     if (rowCount > 0)
                     {
@@ -80,14 +84,16 @@ namespace btl_lthsk_quanlythuvien.Forms
 
         private void btnAddBook_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtNameBook.Text) || nmBook.Value < 1 || cbTypeBook.SelectedValue == null)
+            {
+                MessageBox.Show("Nhập đầy đủ thông tin sách");
+                return;
+            }
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
-                    con.Open();
-                    cmd = new SqlCommand("SELECT COUNT(*) FROM tblSach", con);
-                    cmd.CommandType = CommandType.Text;
-                    var count = int.Parse(cmd.ExecuteScalar().ToString()) + 1;
+                    var count = dtBook.Rows.Count + 1;
                     string id = String.Format("S{0}", createId(count));
                     cmd = new SqlCommand("insertSach", con);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -95,6 +101,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                     cmd.Parameters.Add("@tens", SqlDbType.NVarChar).Value = txtNameBook.Text;
                     cmd.Parameters.Add("@mal", SqlDbType.NVarChar).Value = cbTypeBook.SelectedValue.ToString();
                     cmd.Parameters.Add("@sl", SqlDbType.Int).Value = nmBook.Value;
+                    con.Open();
                     int rowCount = cmd.ExecuteNonQuery();
                     if (rowCount > 0)
                     {
@@ -120,6 +127,16 @@ namespace btl_lthsk_quanlythuvien.Forms
             }
         }
 
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cbTypeSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void FormLibrary_Load(object sender, EventArgs e)
         {
             if(dtType == null && dtBook == null)
@@ -134,6 +151,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             cbTypeSearch.ValueMember = "sMaL";
             dgvBook.DataSource = dtBook;
         }
+
         private void loadData()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -167,6 +185,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                 }
             }
         }
+
         private string createId(int count)
         {
             string id = "";

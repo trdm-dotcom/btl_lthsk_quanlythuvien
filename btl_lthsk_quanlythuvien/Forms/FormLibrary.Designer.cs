@@ -32,14 +32,13 @@ namespace btl_lthsk_quanlythuvien.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvBook = new System.Windows.Forms.DataGridView();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddBook = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nmBook = new System.Windows.Forms.NumericUpDown();
@@ -49,6 +48,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.txtNameType = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnAddType = new System.Windows.Forms.Button();
@@ -71,16 +71,16 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvBook.AllowUserToAddRows = false;
             this.dgvBook.AllowUserToDeleteRows = false;
             this.dgvBook.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvBook.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvBook.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvBook.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBook.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBook.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvBook.ColumnHeadersHeight = 37;
             this.dgvBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvBook.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -88,8 +88,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.colName,
             this.colType,
             this.colQuantity,
-            this.colNum,
-            this.colAction});
+            this.colNum});
             this.dgvBook.EnableHeadersVisualStyles = false;
             this.dgvBook.Location = new System.Drawing.Point(11, 16);
             this.dgvBook.Margin = new System.Windows.Forms.Padding(15);
@@ -97,7 +96,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvBook.ReadOnly = true;
             this.dgvBook.Size = new System.Drawing.Size(506, 232);
             this.dgvBook.TabIndex = 0;
-            this.dgvBook.BorderStyle = BorderStyle.None;
             this.dgvBook.AutoGenerateColumns = false;
             // 
             // colId
@@ -139,13 +137,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.colNum.Name = "colNum";
             this.colNum.ReadOnly = true;
             this.colNum.Width = 50;
-            // 
-            // colAction
-            // 
-            this.colAction.HeaderText = "Tác vụ";
-            this.colAction.Name = "colAction";
-            this.colAction.ReadOnly = true;
-            this.colAction.Width = 125;
             // 
             // btnAddBook
             // 
@@ -190,6 +181,9 @@ namespace btl_lthsk_quanlythuvien.Forms
             // 
             // cbTypeBook
             // 
+            this.cbTypeBook.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbTypeBook.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbTypeBook.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeBook.FormattingEnabled = true;
             this.cbTypeBook.Location = new System.Drawing.Point(102, 98);
             this.cbTypeBook.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
@@ -209,32 +203,36 @@ namespace btl_lthsk_quanlythuvien.Forms
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(18, 134);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 16);
+            this.label3.Size = new System.Drawing.Size(67, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Số lượng";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(18, 101);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 16);
+            this.label2.Size = new System.Drawing.Size(60, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "Thể loại";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(18, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 16);
+            this.label1.Size = new System.Drawing.Size(65, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "Tên sách";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.txtNameType);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.btnAddType);
@@ -245,6 +243,21 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thể loại";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(8, 136);
+            this.button1.Margin = new System.Windows.Forms.Padding(10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(80, 35);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Sửa";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // txtNameType
             // 
@@ -258,9 +271,10 @@ namespace btl_lthsk_quanlythuvien.Forms
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(10, 38);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 16);
+            this.label6.Size = new System.Drawing.Size(60, 16);
             this.label6.TabIndex = 9;
             this.label6.Text = "Thể loại";
             // 
@@ -282,28 +296,34 @@ namespace btl_lthsk_quanlythuvien.Forms
             // 
             // cbTypeSearch
             // 
+            this.cbTypeSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbTypeSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbTypeSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeSearch.FormattingEnabled = true;
             this.cbTypeSearch.Location = new System.Drawing.Point(8, 132);
             this.cbTypeSearch.Margin = new System.Windows.Forms.Padding(10);
             this.cbTypeSearch.Name = "cbTypeSearch";
             this.cbTypeSearch.Size = new System.Drawing.Size(167, 24);
             this.cbTypeSearch.TabIndex = 9;
+            this.cbTypeSearch.SelectedIndexChanged += new System.EventHandler(this.cbTypeSearch_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(5, 32);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 16);
+            this.label4.Size = new System.Drawing.Size(65, 16);
             this.label4.TabIndex = 9;
             this.label4.Text = "Tên sách";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(5, 105);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 16);
+            this.label5.Size = new System.Drawing.Size(60, 16);
             this.label5.TabIndex = 9;
             this.label5.Text = "Thể loại";
             // 
@@ -347,6 +367,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(167, 37);
             this.textBox2.TabIndex = 10;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // groupBox2
             // 
@@ -410,11 +431,11 @@ namespace btl_lthsk_quanlythuvien.Forms
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAction;
+        private DataGridViewTextBoxColumn colId;
+        private DataGridViewTextBoxColumn colName;
+        private DataGridViewTextBoxColumn colType;
+        private DataGridViewTextBoxColumn colQuantity;
+        private DataGridViewTextBoxColumn colNum;
+        private Button button1;
     }
 }
