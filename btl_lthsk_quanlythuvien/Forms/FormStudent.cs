@@ -26,7 +26,8 @@ namespace btl_lthsk_quanlythuvien.Forms
             {
                 loadStudents();
             }
-            dgvStudent.DataSource = dt;
+            DataView dv = new DataView(dt);
+            dgvStudent.DataSource = dv;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -54,7 +55,8 @@ namespace btl_lthsk_quanlythuvien.Forms
                         {
                             dt.Rows.Add(new Object[] { txtId.Text, txtName.Text, txtClass.Text, "" });
                             dt.AcceptChanges();
-                            dgvStudent.DataSource = dt;
+                            DataView dv = new DataView(dt);
+                            dgvStudent.DataSource = dv;
                             clear();
                         }
                     }
@@ -69,15 +71,13 @@ namespace btl_lthsk_quanlythuvien.Forms
                         int rowCount = cmd.ExecuteNonQuery();
                         if (rowCount > 0)
                         {
-                            DataRow[] rows = dt.Select(String.Format("sMaSV = '{0}'", txtId.Text));
-                            foreach (DataRow row in rows)
-                            {
-                                row["sMaSV"] = txtId.Text;
-                                row["sTenSV"] = txtName.Text;
-                                row["sLop"] = txtClass.Text;
-                            }
+                            DataRow row = dt.Select(string.Format("sMaSV = '{0}'", txtId.Text))[0];
+                            row["sMaSV"] = txtId.Text;
+                            row["sTenSV"] = txtName.Text;
+                            row["sLop"] = txtClass.Text;
                             dt.AcceptChanges();
-                            dgvStudent.DataSource = dt;
+                            DataView dv = new DataView(dt);
+                            dgvStudent.DataSource = dv;
                             clear();
                         }
                     }
@@ -114,7 +114,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             DataGridViewRow dataRow = dgvStudent.Rows[index];
             string id = dataRow.Cells[0].Value.ToString();
             string name = dataRow.Cells[1].Value.ToString();
-            DialogResult res = MessageBox.Show(String.Format("Thực hiện khóa sinh viên {0} mượn sách", name), "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            DialogResult res = MessageBox.Show(string.Format("Thực hiện khóa sinh viên {0} mượn sách", name), "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if(res == DialogResult.OK)
             {
                 using (SqlConnection con = new SqlConnection(connectionString))
@@ -128,13 +128,11 @@ namespace btl_lthsk_quanlythuvien.Forms
                         int rowCount = cmd.ExecuteNonQuery();
                         if (rowCount > 0)
                         {
-                            DataRow[] rows = dt.Select(String.Format("sMaSV = '{0}'", txtId.Text));
-                            foreach (DataRow row in rows)
-                            {
-                                row["trangthai"] = "Khóa";
-                            }
+                            DataRow row = dt.Select(string.Format("sMaSV = '{0}'", txtId.Text))[0];
+                            row["trangthai"] = "Khóa";
                             dt.AcceptChanges();
-                            dgvStudent.DataSource = dt;
+                            DataView dv = new DataView(dt);
+                            dgvStudent.DataSource = dv;
                             clear();
                         }
                     }

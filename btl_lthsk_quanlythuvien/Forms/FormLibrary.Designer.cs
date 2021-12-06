@@ -32,13 +32,8 @@ namespace btl_lthsk_quanlythuvien.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvBook = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddBook = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nmBook = new System.Windows.Forms.NumericUpDown();
@@ -57,8 +52,16 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.matheloai = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBook)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmBook)).BeginInit();
@@ -73,19 +76,20 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvBook.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvBook.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvBook.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBook.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBook.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBook.ColumnHeadersHeight = 37;
             this.dgvBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvBook.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName,
+            this.matheloai,
             this.colType,
             this.colQuantity,
             this.colNum});
@@ -96,47 +100,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvBook.ReadOnly = true;
             this.dgvBook.Size = new System.Drawing.Size(506, 232);
             this.dgvBook.TabIndex = 0;
-            this.dgvBook.AutoGenerateColumns = false;
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "sMaS";
-            this.colId.HeaderText = "Mã sách";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "sTenS";
-            this.colName.HeaderText = "Tên sách";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 200;
-            // 
-            // colType
-            // 
-            this.colType.DataPropertyName = "sTenL";
-            this.colType.HeaderText = "Thể loại";
-            this.colType.Name = "colType";
-            this.colType.ReadOnly = true;
-            this.colType.Width = 120;
-            // 
-            // colQuantity
-            // 
-            this.colQuantity.DataPropertyName = "iSoLuong";
-            this.colQuantity.HeaderText = "SL";
-            this.colQuantity.Name = "colQuantity";
-            this.colQuantity.ReadOnly = true;
-            this.colQuantity.Width = 50;
-            // 
-            // colNum
-            // 
-            this.colNum.DataPropertyName = "duocmuon";
-            this.colNum.HeaderText = "Mượn";
-            this.colNum.Name = "colNum";
-            this.colNum.ReadOnly = true;
-            this.colNum.Width = 50;
             // 
             // btnAddBook
             // 
@@ -305,7 +268,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.cbTypeSearch.Name = "cbTypeSearch";
             this.cbTypeSearch.Size = new System.Drawing.Size(167, 24);
             this.cbTypeSearch.TabIndex = 9;
-            this.cbTypeSearch.SelectedIndexChanged += new System.EventHandler(this.cbTypeSearch_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -334,10 +296,9 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(8, 176);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(10);
+            this.btnUpdate.Location = new System.Drawing.Point(8, 206);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(80, 35);
+            this.btnUpdate.Size = new System.Drawing.Size(80, 24);
             this.btnUpdate.TabIndex = 3;
             this.btnUpdate.Text = "Sửa";
             this.btnUpdate.UseVisualStyleBackColor = false;
@@ -350,28 +311,28 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(95, 176);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(10);
+            this.btnDelete.Location = new System.Drawing.Point(95, 206);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 35);
+            this.btnDelete.Size = new System.Drawing.Size(80, 24);
             this.btnDelete.TabIndex = 10;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // textBox2
+            // txtSearch
             // 
-            this.textBox2.Location = new System.Drawing.Point(8, 58);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(167, 37);
-            this.textBox2.TabIndex = 10;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtSearch.Location = new System.Drawing.Point(8, 58);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(10);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(167, 37);
+            this.txtSearch.TabIndex = 10;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.btnPrint);
+            this.groupBox2.Controls.Add(this.btnSearch);
+            this.groupBox2.Controls.Add(this.txtSearch);
             this.groupBox2.Controls.Add(this.btnDelete);
             this.groupBox2.Controls.Add(this.btnUpdate);
             this.groupBox2.Controls.Add(this.label5);
@@ -384,6 +345,84 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tác vụ";
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Location = new System.Drawing.Point(94, 176);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(80, 24);
+            this.btnPrint.TabIndex = 12;
+            this.btnPrint.Text = "In";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(8, 176);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(80, 24);
+            this.btnSearch.TabIndex = 11;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "sMaS";
+            this.colId.HeaderText = "Mã sách";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "sTenS";
+            this.colName.HeaderText = "Tên sách";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 200;
+            // 
+            // matheloai
+            // 
+            this.matheloai.DataPropertyName = "sMaL";
+            this.matheloai.HeaderText = "matheloai";
+            this.matheloai.Name = "matheloai";
+            this.matheloai.ReadOnly = true;
+            this.matheloai.Visible = false;
+            // 
+            // colType
+            // 
+            this.colType.DataPropertyName = "sTenL";
+            this.colType.HeaderText = "Thể loại";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Width = 120;
+            // 
+            // colQuantity
+            // 
+            this.colQuantity.DataPropertyName = "iSoLuong";
+            this.colQuantity.HeaderText = "SL";
+            this.colQuantity.Name = "colQuantity";
+            this.colQuantity.ReadOnly = true;
+            this.colQuantity.Width = 50;
+            // 
+            // colNum
+            // 
+            this.colNum.DataPropertyName = "duocmuon";
+            this.colNum.HeaderText = "Mượn";
+            this.colNum.Name = "colNum";
+            this.colNum.ReadOnly = true;
+            this.colNum.Width = 50;
             // 
             // FormLibrary
             // 
@@ -429,13 +468,16 @@ namespace btl_lthsk_quanlythuvien.Forms
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.GroupBox groupBox2;
+        private Button button1;
+        private Button btnSearch;
+        private Button btnPrint;
         private DataGridViewTextBoxColumn colId;
         private DataGridViewTextBoxColumn colName;
+        private DataGridViewTextBoxColumn matheloai;
         private DataGridViewTextBoxColumn colType;
         private DataGridViewTextBoxColumn colQuantity;
         private DataGridViewTextBoxColumn colNum;
-        private Button button1;
     }
 }

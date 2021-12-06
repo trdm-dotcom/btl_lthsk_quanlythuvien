@@ -23,7 +23,8 @@ namespace btl_lthsk_quanlythuvien.Forms
             {
                 loadUser();
             }
-            dgvUser.DataSource = dt;
+            DataView dv = new DataView(dt);
+            dgvUser.DataSource = dv;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -54,7 +55,8 @@ namespace btl_lthsk_quanlythuvien.Forms
                         {
                             dt.Rows.Add(new Object[] { id, name });
                             dt.AcceptChanges();
-                            dgvUser.DataSource = dt;
+                            DataView dv = new DataView(dt);
+                            dgvUser.DataSource = dv;
                             clear();
                         }
                     }
@@ -81,13 +83,11 @@ namespace btl_lthsk_quanlythuvien.Forms
                         int rowCount = cmd.ExecuteNonQuery();
                         if (rowCount > 0)
                         {
-                            DataRow[] rows = dt.Select(String.Format("sMaTT = '{0}'", id));
-                            foreach (DataRow row in rows)
-                            {
-                                row["sTenTT"] = name;
-                            }
+                            DataRow row = dt.Select(String.Format("sMaTT = '{0}'", id))[0];
+                            row["sTenTT"] = name;
                             dt.AcceptChanges();
-                            dgvUser.DataSource = dt;
+                            DataView dv = new DataView(dt);
+                            dgvUser.DataSource = dv;
                             clear();
                         }
                     }
@@ -122,7 +122,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             DataGridViewRow dataRow = dgvUser.Rows[index];
             string name = dataRow.Cells[1].Value.ToString();
             string id = dataRow.Cells[0].Value.ToString();
-            DialogResult res = MessageBox.Show(String.Format("Thực hiện xóa {0} khỏi hệ thống", name), "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            DialogResult res = MessageBox.Show(string.Format("Thực hiện xóa {0} khỏi hệ thống", name), "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if(res == DialogResult.OK)
             {
                 using (SqlConnection con = new SqlConnection(connectionString))
@@ -142,7 +142,8 @@ namespace btl_lthsk_quanlythuvien.Forms
                                 row.Delete();
                             }
                             dt.AcceptChanges();
-                            dgvUser.DataSource = dt;
+                            DataView dv = new DataView(dt);
+                            dgvUser.DataSource = dv;
                         }
                         clear();
                     }
@@ -187,9 +188,9 @@ namespace btl_lthsk_quanlythuvien.Forms
                     string id = "TT";
                     for (int i = 0; i < 8 - count.ToString().Length; i++)
                     {
-                        id += String.Format("{0}", 0);
+                        id += string.Format("{0}", 0);
                     }
-                    id += String.Format("{0}", count);
+                    id += string.Format("{0}", count);
                     return id;
                 }
                 catch (SqlException ex)

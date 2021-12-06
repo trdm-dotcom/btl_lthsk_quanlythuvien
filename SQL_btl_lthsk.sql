@@ -1,4 +1,4 @@
-
+﻿
 ALTER TABLE tblSach ALTER COLUMN sTenS nvarchar(255);
 ALTER TABLE tblSinhvien ALTER COLUMN sTenSV nvarchar(255);
 ALTER TABLE tblThuthu ALTER COLUMN sTenTT nvarchar(255);
@@ -8,6 +8,7 @@ ALTER TABLE tblPhieumuon ADD iTrangthai int
 ALTER TABLE tblThuthu ADD sMatkhau varchar(255)
 ALTER TABLE tblThuthu ADD iQuyen int
 ALTER TABLE tblSinhvien ADD iTrangthai int
+ALTER TABLE tblPhieumuon ADD dNgayMuon date
 
 create table tblTaikhoan(
 	sMaTK nvarchar(10) NOT NULL,
@@ -131,7 +132,7 @@ as
 Begin
 	SELECT sMaSV,sTenSV,sLop, 
 	CASE 
-		WHEN iTrangthai = 0 THEN 'Kh�a'
+		WHEN iTrangthai = 0 THEN N'Khóa'
 		ELSE ''
 	END AS trangthai
 	FROM tblSinhvien ORDER BY sTenSV, sLop ASC
@@ -184,4 +185,109 @@ create proc doLogin
 as
 Begin
 	Select * from tblThuthu where sMaTT = @matt and sMatkhau = @pass
+End
+
+
+create proc getPhieu
+as
+Begin
+	Select  tblPhieumuon.sMaPhieu,tblThuthu.sMaTT,tblSinhvien.sMaSV,dNgayMuon,sTenTT,sTenSV,tblPhieuMuon.iTrangthai,CASE WHEN tblPhieuMuon.iTrangthai = 1 THEN N'Đã trả' ELSE N'Chưa trả' END as trangthai  from tblPhieumuon 
+	inner join tblSinhvien
+	on tblPhieumuon.sMaSV = tblSinhvien.sMaSV
+	inner join tblThuthu
+	on tblPhieumuon.sMaTT = tblThuthu.sMaTT
+	Order By dNgayMuon DESC
+End
+
+create proc doChangePass
+@matt nvarchar(10),
+@pass varchar(255),
+@new varchar(255)
+as
+begin
+	if EXISTS (SELECT * FROM tblThuthu WHERE sMaTT = @matt AND sMatkhau = @pass)
+		begin
+			Begin TRAN
+				Begin TRY
+					update tblThuthu set sMatkhau = @new where sMaTT = @matt
+					COMMIT TRANSACTION
+				End Try
+			Begin CATCH
+				ROLLBACK TRANSACTION
+			End CATCH
+		end
+end
+
+
+create proc insertPhieumuon
+@mapm nvarchar(10),
+@matt nvarchar(10),
+@masv nvarchar(10),
+@dngaymuon date
+as
+begin
+Begin TRAN
+	Begin TRY
+			insert into tblPhieumuon(sMaPhieu,sMaTT,sMaSV,iTrangthai,dNgayMuon) values(@mapm,@matt,@masv,0,@dngaymuon)
+			COMMIT TRANSACTION
+		End Try
+	Begin CATCH
+		ROLLBACK TRANSACTION
+	End CATCH
+end
+
+create proc insertChitiet
+@mapm nvarchar(10),
+@mas nvarchar(10)
+as
+begin
+	if EXISTS (SELECT * FROM tblPhieumuon WHERE sMaPhieu = @mapm)
+		begin
+			Begin TRAN
+				Begin TRY
+					insert into tblPhieumuonchitiet(sMaPhieu,sMaS) values(@mapm,@mas)
+					COMMIT TRANSACTION
+				End Try
+			Begin CATCH
+				ROLLBACK TRANSACTION
+			End CATCH
+		end
+end
+
+create proc getChitiet
+@mapm nvarchar(10)
+as
+begin
+	select * from tblPhieumuonchitiet where sMaPhieu = @mapm
+end
+
+create proc traSach
+@mapm nvarchar(10)
+as
+begin
+	Begin TRAN
+		Begin TRY
+			UPDATE tblPhieumuon SET iTrangthai = 1 WHERE sMaPhieu = @mapm
+			COMMIT TRANSACTION
+		End Try
+	Begin CATCH
+		ROLLBACK TRANSACTION
+	End CATCH
+end
+
+create proc updateSach
+@mas nvarchar(10),
+@tens nvarchar(255),
+@mal nvarchar(10),
+@sl int
+as
+Begin
+	Begin TRAN
+		Begin TRY
+			update tblSach set sTenS = @tens, iSoLuong = @sl, sMaL = @mal where sMaS = @mas 
+			COMMIT TRANSACTION
+		End Try
+	Begin CATCH
+		ROLLBACK TRANSACTION
+	End CATCH
 End

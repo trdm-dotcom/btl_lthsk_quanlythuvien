@@ -81,7 +81,7 @@ namespace btl_lthsk_quanlythuvien
 
         private void btnCard_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new Forms.FormLibaryCard(), sender);
+            OpenChildForm(new Forms.FormLibraryCard(this.user), sender);
         }
 
         private void btnUser_Click(object sender, EventArgs e)
@@ -91,12 +91,12 @@ namespace btl_lthsk_quanlythuvien
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FormChangePass(), sender);
+            OpenChildForm(new Forms.FormChangePass(this.user), sender);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            lbWelcome.Text = String.Format("Xin chào {0} đăng nhập vào hệ thống", user.Name);
+            lbWelcome.Text = string.Format("Xin chào {0} đăng nhập vào hệ thống", this.user.Name);
             if(user.Type != 1)
             {
                 btnUser.Hide();

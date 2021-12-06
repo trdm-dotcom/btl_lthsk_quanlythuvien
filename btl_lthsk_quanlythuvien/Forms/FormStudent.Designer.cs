@@ -34,6 +34,10 @@ namespace btl_lthsk_quanlythuvien.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvStudent = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -43,10 +47,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnBand = new System.Windows.Forms.Button();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudent)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,18 +67,8 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.dgvStudent.AllowUserToAddRows = false;
             this.dgvStudent.AllowUserToDeleteRows = false;
             this.dgvStudent.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvStudent.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvStudent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvStudent.ColumnHeadersHeight = 37;
-            this.dgvStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvStudent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colId,
-            this.colName,
-            this.colClass,
-            this.colStatus});
-            this.dgvStudent.Location = new System.Drawing.Point(275, 53);
-            this.dgvStudent.Name = "dgvStudent";
-            this.dgvStudent.ReadOnly = true;
-            this.dgvStudent.EnableHeadersVisualStyles = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -87,10 +77,49 @@ namespace btl_lthsk_quanlythuvien.Forms
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvStudent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvStudent.ColumnHeadersHeight = 37;
+            this.dgvStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvStudent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colId,
+            this.colName,
+            this.colClass,
+            this.colStatus});
+            this.dgvStudent.EnableHeadersVisualStyles = false;
+            this.dgvStudent.Location = new System.Drawing.Point(275, 53);
+            this.dgvStudent.Name = "dgvStudent";
+            this.dgvStudent.ReadOnly = true;
             this.dgvStudent.Size = new System.Drawing.Size(415, 230);
             this.dgvStudent.TabIndex = 2;
-            this.dgvStudent.BorderStyle = BorderStyle.None;
-            this.dgvStudent.AutoGenerateColumns = false;
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "sMaSV";
+            this.colId.HeaderText = "Mã SV";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "sTenSV";
+            this.colName.HeaderText = "Họ tên";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 150;
+            // 
+            // colClass
+            // 
+            this.colClass.DataPropertyName = "sLop";
+            this.colClass.HeaderText = "Lớp";
+            this.colClass.Name = "colClass";
+            this.colClass.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "trangthai";
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            this.colStatus.Width = 90;
             // 
             // txtId
             // 
@@ -196,36 +225,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.btnBand.Text = "Khóa";
             this.btnBand.UseVisualStyleBackColor = false;
             this.btnBand.Click += new System.EventHandler(this.btnBand_Click);
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "sMaSV";
-            this.colId.HeaderText = "Mã SV";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "sTenSV";
-            this.colName.HeaderText = "Họ tên";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 150;
-            // 
-            // colClass
-            // 
-            this.colClass.DataPropertyName = "sLop";
-            this.colClass.HeaderText = "Lớp";
-            this.colClass.Name = "colClass";
-            this.colClass.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "trangthai";
-            this.colStatus.HeaderText = "Trạng thái";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 90;
             // 
             // FormStudent
             // 

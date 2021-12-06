@@ -23,7 +23,7 @@ namespace btl_lthsk_quanlythuvien
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtPassword.Text) || cbUser.SelectedValue == null)
+            if (string.IsNullOrEmpty(txtPassword.Text) || cbUser.SelectedValue == null)
             {
                 MessageBox.Show("Vui lòng nhập mật khẩu và chọn thủ thư");
                 return;

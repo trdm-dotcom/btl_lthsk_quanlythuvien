@@ -33,9 +33,10 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNew = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtConf = new System.Windows.Forms.TextBox();
+            this.btnConf = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -80,15 +81,15 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.txtPassword.Size = new System.Drawing.Size(158, 22);
             this.txtPassword.TabIndex = 3;
             // 
-            // textBox1
+            // txtNew
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(167, 81);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PasswordChar = '*';
-            this.textBox1.Size = new System.Drawing.Size(158, 22);
-            this.textBox1.TabIndex = 4;
+            this.txtNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNew.Location = new System.Drawing.Point(167, 81);
+            this.txtNew.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.txtNew.Name = "txtNew";
+            this.txtNew.PasswordChar = '*';
+            this.txtNew.Size = new System.Drawing.Size(158, 22);
+            this.txtNew.TabIndex = 4;
             // 
             // label4
             // 
@@ -100,24 +101,41 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.label4.TabIndex = 5;
             this.label4.Text = "Xác nhận mật khẩu:";
             // 
-            // textBox2
+            // txtConf
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(167, 109);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(158, 22);
-            this.textBox2.TabIndex = 6;
+            this.txtConf.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConf.Location = new System.Drawing.Point(167, 109);
+            this.txtConf.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.txtConf.Name = "txtConf";
+            this.txtConf.PasswordChar = '*';
+            this.txtConf.Size = new System.Drawing.Size(158, 22);
+            this.txtConf.TabIndex = 6;
+            // 
+            // btnConf
+            // 
+            this.btnConf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
+            this.btnConf.FlatAppearance.BorderSize = 0;
+            this.btnConf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConf.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConf.ForeColor = System.Drawing.Color.White;
+            this.btnConf.Location = new System.Drawing.Point(225, 144);
+            this.btnConf.Margin = new System.Windows.Forms.Padding(10);
+            this.btnConf.Name = "btnConf";
+            this.btnConf.Size = new System.Drawing.Size(100, 35);
+            this.btnConf.TabIndex = 7;
+            this.btnConf.Text = "Xác nhận";
+            this.btnConf.UseVisualStyleBackColor = false;
+            this.btnConf.Click += new System.EventHandler(this.btnConf_Click);
             // 
             // FormChangePass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.btnConf);
+            this.Controls.Add(this.txtConf);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtNew);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -135,8 +153,9 @@ namespace btl_lthsk_quanlythuvien.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNew;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtConf;
+        private System.Windows.Forms.Button btnConf;
     }
 }
