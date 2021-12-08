@@ -84,7 +84,8 @@ namespace btl_lthsk_quanlythuvien.Forms
         }
         private void btnPrint_Click(object sender, EventArgs e)
         {
-
+            ViewReport.ViewReport view = new ViewReport.ViewReport("Sach", dtBook);
+            view.Show();
         }
 
         private void btnAddType_Click(object sender, EventArgs e)

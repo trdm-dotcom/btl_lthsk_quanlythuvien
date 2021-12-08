@@ -180,14 +180,25 @@ namespace btl_lthsk_quanlythuvien.Forms
                             }
                             String tenSV = dtStudent.Select(string.Format("sMaSV = '{0}'", txtIDSV.Text.ToString()))[0]["sTenSV"].ToString();
                             String tenTT = cbUser.GetItemText(cbUser.SelectedItem);
-                            dtCard.Rows.Add(new Object[] { txtId.Text.ToString(), cbUser.SelectedValue.ToString(), txtIDSV.Text.ToString(), dateTimePicker1.Value.Date, tenTT, tenSV, "Chưa trả" });
+                            dtCard.Rows.Add(new Object[] { txtId.Text.ToString(), cbUser.SelectedValue.ToString(), txtIDSV.Text.ToString(), dateTimePicker1.Value.Date, tenTT, tenSV, 0,"Chưa trả" });
                             dtCard.AcceptChanges();
                             DataView dvCard = new DataView(dtCard);
                             dgvLibraryCard.DataSource = dvCard;
-                            txtId.Clear();
-                            txtIDSV.Clear();
                             btnAdd.Enabled = false;
                             btnCreate.Enabled = false;
+                            ViewReport.ViewPhieuMuon viewPhieuMuon = new ViewReport.ViewPhieuMuon(new LibraryCardInfo
+                            {
+                                idCard = txtId.Text.ToString(),
+                                idUser = cbUser.SelectedValue.ToString(),
+                                nameUser = tenTT,
+                                nameStudent = tenSV,
+                                idStudent = txtIDSV.Text.ToString(),
+                                status = "Chưa trả",
+                                date = Convert.ToDateTime(DateTime.Now.Date.ToString())
+                            }, dt);
+                            viewPhieuMuon.Show();
+                            txtId.Clear();
+                            txtIDSV.Clear();
                             dt.Clear();
                         }
                         else
@@ -241,7 +252,8 @@ namespace btl_lthsk_quanlythuvien.Forms
         }
         private void btnPrint_Click(object sender, EventArgs e)
         {
-
+            ViewReport.ViewReport view = new ViewReport.ViewReport("DanhSachPhieu", dtCard);
+            view.Show();
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -262,6 +274,13 @@ namespace btl_lthsk_quanlythuvien.Forms
                 if(dt.Select(string.Format("sMaS = '{0}'", txtIDBook.Text.ToString().ToString())).Length > 0)
                 {
                     MessageBox.Show("Sinh viên được mượn mỗi sách 1 quyển");
+                    return;
+                }
+                int tong = int.Parse(dr[0]["iSoLuong"].ToString());
+                int muon = int.Parse(dr[0]["duocmuon"].ToString());
+                if(muon >= tong)
+                {
+                    MessageBox.Show("Kiểm tra lại mã sách");
                     return;
                 }
                 DataRow row = dt.NewRow();
