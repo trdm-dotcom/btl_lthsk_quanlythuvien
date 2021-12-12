@@ -31,6 +31,7 @@ namespace btl_lthsk_quanlythuvien
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnUser = new System.Windows.Forms.Button();
             this.btnCard = new System.Windows.Forms.Button();
             this.btnBook = new System.Windows.Forms.Button();
@@ -38,13 +39,16 @@ namespace btl_lthsk_quanlythuvien
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panelDesktop = new System.Windows.Forms.Panel();
+            this.lbWelcome = new System.Windows.Forms.Label();
             this.panelMenu.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panelDesktop.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
+            this.panelMenu.Controls.Add(this.button1);
             this.panelMenu.Controls.Add(this.btnUser);
             this.panelMenu.Controls.Add(this.btnCard);
             this.panelMenu.Controls.Add(this.btnBook);
@@ -55,6 +59,24 @@ namespace btl_lthsk_quanlythuvien
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(190, 561);
             this.panelMenu.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(0, 203);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
+            this.button1.Size = new System.Drawing.Size(190, 37);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Đổi mật khẩu";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnUser
             // 
@@ -157,13 +179,24 @@ namespace btl_lthsk_quanlythuvien
             // panelDesktop
             // 
             this.panelDesktop.AutoSize = true;
+            this.panelDesktop.Controls.Add(this.lbWelcome);
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelDesktop.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.panelDesktop.Location = new System.Drawing.Point(190, 0);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(818, 561);
+            this.panelDesktop.Size = new System.Drawing.Size(842, 561);
             this.panelDesktop.TabIndex = 1;
+            // 
+            // lbWelcome
+            // 
+            this.lbWelcome.AutoSize = true;
+            this.lbWelcome.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbWelcome.Location = new System.Drawing.Point(54, 31);
+            this.lbWelcome.Name = "lbWelcome";
+            this.lbWelcome.Size = new System.Drawing.Size(65, 24);
+            this.lbWelcome.TabIndex = 0;
+            this.lbWelcome.Text = "label2";
             // 
             // MainForm
             // 
@@ -171,14 +204,17 @@ namespace btl_lthsk_quanlythuvien
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.ClientSize = new System.Drawing.Size(1032, 561);
             this.Controls.Add(this.panelDesktop);
             this.Controls.Add(this.panelMenu);
             this.Name = "MainForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelMenu.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panelDesktop.ResumeLayout(false);
+            this.panelDesktop.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,6 +230,8 @@ namespace btl_lthsk_quanlythuvien
         private System.Windows.Forms.Button btnUser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelDesktop;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lbWelcome;
     }
 }
 

@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace btl_lthsk_quanlythuvien.Forms
 {
     partial class FormUser
@@ -29,8 +31,11 @@ namespace btl_lthsk_quanlythuvien.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvUser = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -39,8 +44,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             this.SuspendLayout();
@@ -67,16 +70,46 @@ namespace btl_lthsk_quanlythuvien.Forms
             // 
             this.dgvUser.AllowUserToAddRows = false;
             this.dgvUser.AllowUserToDeleteRows = false;
-            this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUser.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvUser.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvUser.ColumnHeadersHeight = 37;
+            this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName});
+            this.dgvUser.EnableHeadersVisualStyles = false;
             this.dgvUser.Location = new System.Drawing.Point(284, 53);
             this.dgvUser.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.dgvUser.Name = "dgvUser";
             this.dgvUser.ReadOnly = true;
             this.dgvUser.Size = new System.Drawing.Size(344, 160);
             this.dgvUser.TabIndex = 8;
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "sMaTT";
+            this.colId.HeaderText = "ID";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            this.colId.Width = 200;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "sTenTT";
+            this.colName.HeaderText = "Họ tên";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 200;
             // 
             // btnAdd
             // 
@@ -140,7 +173,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(39, 56);
+            this.label2.Location = new System.Drawing.Point(22, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 16);
             this.label2.TabIndex = 3;
@@ -177,23 +210,6 @@ namespace btl_lthsk_quanlythuvien.Forms
             this.label1.TabIndex = 0;
             this.label1.Text = "Thông tin thủ thư";
             // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "sMaTT";
-            this.colId.HeaderText = "ID";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            this.colId.Width = 200;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "sTenTT";
-            this.colName.HeaderText = "Họ tên";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 150;
-            // 
             // FormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,7 +240,7 @@ namespace btl_lthsk_quanlythuvien.Forms
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dgvUser;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private DataGridViewTextBoxColumn colId;
+        private DataGridViewTextBoxColumn colName;
     }
 }

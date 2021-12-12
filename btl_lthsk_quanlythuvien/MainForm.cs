@@ -11,11 +11,17 @@ namespace btl_lthsk_quanlythuvien
 {
     public partial class MainForm : Form
     {
+        private User user;
         private Button currentButton;
         private Form activateForm;
         public MainForm()
         {
             InitializeComponent();
+        }
+        public MainForm(User user)
+        {
+            InitializeComponent();
+            this.user = user;
         }
         private void ActivateButton(object btnSender)
         {
@@ -65,22 +71,36 @@ namespace btl_lthsk_quanlythuvien
 
         private void btnStudent_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new Forms.FormStudents(), sender);
+            OpenChildForm(new Forms.FormStudent(), sender);
         }
 
         private void btnBook_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new Forms.FormBook(), sender);
+            OpenChildForm(new Forms.FormLibrary(), sender);
         }
 
         private void btnCard_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new Forms.FormLibaryCard(), sender);
+            OpenChildForm(new Forms.FormLibraryCard(this.user), sender);
         }
 
         private void btnUser_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormUser(), sender);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormChangePass(this.user), sender);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            lbWelcome.Text = string.Format("Xin chào {0} đăng nhập vào hệ thống", this.user.Name);
+            if(user.Type != 1)
+            {
+                btnUser.Hide();
+            }
         }
     }
 }
