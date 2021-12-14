@@ -23,13 +23,13 @@ namespace btl_lthsk_quanlythuvien.Forms
             {
                 loadUser();
             }
-            DataView dv = new DataView(dt);
+            DataView dv = dt.DefaultView;
             dgvUser.DataSource = dv;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!hastext(txtName.Text) || !hastext(txtPassword.Text))
+            if (!hastext(txtName.Text) || (!hastext(txtPassword.Text) && btnAdd.Tag == null))
             {
                 MessageBox.Show("Nhập lại thông tin");
                 return;
@@ -55,7 +55,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                         {
                             dt.Rows.Add(new Object[] { id, name });
                             dt.AcceptChanges();
-                            DataView dv = new DataView(dt);
+                            DataView dv = dt.DefaultView;
                             dgvUser.DataSource = dv;
                             clear();
                         }
@@ -86,8 +86,9 @@ namespace btl_lthsk_quanlythuvien.Forms
                             DataRow row = dt.Select(String.Format("sMaTT = '{0}'", id))[0];
                             row["sTenTT"] = name;
                             dt.AcceptChanges();
-                            DataView dv = new DataView(dt);
+                            DataView dv = dt.DefaultView;
                             dgvUser.DataSource = dv;
+                            btnAdd.Text = "Thêm";
                             clear();
                         }
                     }
@@ -142,7 +143,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                                 row.Delete();
                             }
                             dt.AcceptChanges();
-                            DataView dv = new DataView(dt);
+                            DataView dv = dt.DefaultView;
                             dgvUser.DataSource = dv;
                         }
                         clear();
@@ -170,7 +171,8 @@ namespace btl_lthsk_quanlythuvien.Forms
         private void clear()
         {
             txtName.Clear();
-            txtPassword.Clear(); 
+            txtPassword.Clear();
+            btnAdd.Tag = null;
         }
 
         private bool hastext(string text)

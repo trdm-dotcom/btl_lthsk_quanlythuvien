@@ -38,8 +38,9 @@ namespace btl_lthsk_quanlythuvien.Forms
                 dr["sMaTT"] = this.user.Iduser;
                 dr["sTenTT"] = this.user.Name;
                 dtUser.Rows.Add(dr);
+                foreach (DataColumn col in dtCard.Columns) col.ReadOnly = false;
             }
-            DataView dvCard = new DataView(dtCard);
+            DataView dvCard = dtCard.DefaultView;
             dgvLibraryCard.DataSource = dvCard;
             cbUser.DataSource = dtUser;
             cbUser.DisplayMember = "sTenTT";
@@ -70,7 +71,7 @@ namespace btl_lthsk_quanlythuvien.Forms
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DataView dvCard = new DataView(dtCard);
+            DataView dvCard = dtCard.DefaultView;
             string select = "";
             if (!string.IsNullOrEmpty(txtIDSearch.Text.ToString()))
             {
@@ -92,14 +93,12 @@ namespace btl_lthsk_quanlythuvien.Forms
         {
             try
             {
-                btnCreate.Enabled = true;
-                btnCreate.Text = "Xác nhận";
-                btnCreate.Tag = "conf";
                 int index = dgvLibraryCard.CurrentRow.Index;
                 DataGridViewRow dataRow = dgvLibraryCard.Rows[index];
                 string idCard = dataRow.Cells[0].Value.ToString();
                 DataRow dr = dtCard.Select(string.Format("sMaPhieu = '{0}'", idCard))[0];
                 string id = dr["sMaPhieu"].ToString();
+                int trangthai =  int.Parse(dr["iTrangthai"].ToString());
                 txtId.Text = id;
                 txtIDSV.Text = dr["sMaSV"].ToString();
                 dateTimePicker1.Value = Convert.ToDateTime(dr["dNgayMuon"].ToString());
@@ -123,6 +122,18 @@ namespace btl_lthsk_quanlythuvien.Forms
                         dt.Rows.Add(drow);
                     }
                     dgvBook.DataSource = dt;
+                }
+                if(trangthai != 1)
+                {
+                    btnCreate.Enabled = true;
+                    btnCreate.Text = "Xác nhận";
+                    btnCreate.Tag = "conf";
+                }
+                else
+                {
+                    btnCreate.Enabled = false;
+                    btnCreate.Text = "Tạo";
+                    btnCreate.Tag = null;
                 }
             }
             catch (SqlException ex)
@@ -182,7 +193,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                             String tenTT = cbUser.GetItemText(cbUser.SelectedItem);
                             dtCard.Rows.Add(new Object[] { txtId.Text.ToString(), cbUser.SelectedValue.ToString(), txtIDSV.Text.ToString(), dateTimePicker1.Value.Date, tenTT, tenSV, 0,"Chưa trả" });
                             dtCard.AcceptChanges();
-                            DataView dvCard = new DataView(dtCard);
+                            DataView dvCard = dtCard.DefaultView;
                             dgvLibraryCard.DataSource = dvCard;
                             btnAdd.Enabled = false;
                             btnCreate.Enabled = false;
@@ -214,15 +225,18 @@ namespace btl_lthsk_quanlythuvien.Forms
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@mapm", SqlDbType.NVarChar).Value = idCard;
                         int rowCount = cmd.ExecuteNonQuery();
-                        if (rowCount > 0) {
+                        if (rowCount > 0)
+                        {
                             DataRow row = dtCard.Select(string.Format("sMaPhieu = '{0}'", idCard))[0];
                             row["trangthai"] = "Đã trả";
                             dtCard.AcceptChanges();
-                            DataView dvCard = new DataView(dtCard);
+                            DataView dvCard = dtCard.DefaultView;
                             dgvLibraryCard.DataSource = dvCard;
                             txtId.Clear();
                             txtIDSV.Clear();
                             dt.Clear();
+                            btnCreate.Text = "Tạo";
+                            btnCreate.Tag = null;
                             dateTimePicker1.Value = Convert.ToDateTime(DateTime.Now.Date.ToString());
                             btnCreate.Enabled = false;
                             MessageBox.Show("Hoàn thành");
@@ -233,7 +247,6 @@ namespace btl_lthsk_quanlythuvien.Forms
                             MessageBox.Show("Thực hiên lại");
                             return;
                         }
-
                     }
                 }
                 catch (SqlException ex)
@@ -252,7 +265,23 @@ namespace btl_lthsk_quanlythuvien.Forms
         }
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            ViewReport.ViewReport view = new ViewReport.ViewReport("DanhSachPhieu", dtCard);
+            DataView dvCard = dtCard.DefaultView;
+            string select = "";
+            if (!string.IsNullOrEmpty(txtIDSearch.Text.ToString()))
+            {
+                select += string.Format("sMaPhieu = '{0}'", txtIDSearch.Text.ToString());
+            }
+            if (!string.IsNullOrEmpty(cbType.SelectedValue.ToString()) && string.IsNullOrEmpty(txtIDSearch.Text.ToString()))
+            {
+                select += string.Format("iTrangthai = '{0}'", cbType.SelectedValue.ToString());
+            }
+            else if (!string.IsNullOrEmpty(cbType.SelectedValue.ToString()) && !string.IsNullOrEmpty(txtIDSearch.Text.ToString()))
+            {
+                select += string.Format(" and iTrangthai = '{0}'", cbType.SelectedValue.ToString());
+            }
+            dvCard.RowFilter = select;
+            DataTable dtTemp = dvCard.ToTable();
+            ViewReport.ViewReport view = new ViewReport.ViewReport("DanhSachPhieu", dtTemp);
             view.Show();
         }
         private void btnAdd_Click(object sender, EventArgs e)

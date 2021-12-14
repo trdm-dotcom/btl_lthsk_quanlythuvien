@@ -59,7 +59,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                                 row.Delete();
                             }
                             dtBook.AcceptChanges();
-                            DataView dvBook = new DataView(dtBook);
+                            DataView dvBook = dtBook.DefaultView;
                             dgvBook.DataSource = dvBook;
                         }
                     }
@@ -165,7 +165,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                         {
                             dtBook.Rows.Add(new Object[] { id, txtNameBook.Text, int.Parse(nmBook.Value.ToString()), cbTypeBook.SelectedValue.ToString(), cbTypeBook.GetItemText(cbTypeBook.SelectedItem), 0 });
                             dtBook.AcceptChanges();
-                            DataView dvBook = new DataView(dtBook);
+                            DataView dvBook = dtBook.DefaultView;
                             dgvBook.DataSource = dvBook;
                             txtNameBook.Clear();
                             nmBook.Value = 0;
@@ -189,10 +189,12 @@ namespace btl_lthsk_quanlythuvien.Forms
                             row["sTenL"] = cbTypeBook.GetItemText(cbTypeBook.SelectedItem);
                             row["iSoLuong"] = nmBook.Value;
                             dtBook.AcceptChanges();
-                            DataView dvBook = new DataView(dtBook);
+                            DataView dvBook = dtBook.DefaultView;
                             dgvBook.DataSource = dvBook;
                             txtNameBook.Clear();
                             nmBook.Value = 0;
+                            btnAddBook.Text = "Thêm";
+                            btnAddBook.Tag = null;
                         }
                     }
 
@@ -213,7 +215,7 @@ namespace btl_lthsk_quanlythuvien.Forms
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DataView dvBook = new DataView(dtBook);
+            DataView dvBook = dtBook.DefaultView;
             string select = "";
             if (!string.IsNullOrEmpty(txtSearch.Text.ToString()))
             {
@@ -244,7 +246,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             cbTypeSearch.DataSource = dtTypeSearch;
             cbTypeSearch.DisplayMember = "sTenL";
             cbTypeSearch.ValueMember = "sMaL";
-            DataView dvBook = new DataView(dtBook);
+            DataView dvBook = dtBook.DefaultView;
             dgvBook.DataSource = dvBook;
         }
 
