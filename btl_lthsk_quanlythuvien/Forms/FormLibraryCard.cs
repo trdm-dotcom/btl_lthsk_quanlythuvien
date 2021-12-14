@@ -19,7 +19,7 @@ namespace btl_lthsk_quanlythuvien.Forms
         private DataTable dtBook = null;
         private DataTable dt = null;
         private DataTable dtStudent = null;
-        DataTable dtUser;
+        private DataTable dtUser;
         public FormLibraryCard(User user)
         {
             InitializeComponent();
@@ -102,6 +102,13 @@ namespace btl_lthsk_quanlythuvien.Forms
                 txtId.Text = id;
                 txtIDSV.Text = dr["sMaSV"].ToString();
                 dateTimePicker1.Value = Convert.ToDateTime(dr["dNgayMuon"].ToString());
+
+                dtUser.Clear();
+                DataRow drUser = dtUser.NewRow();
+                drUser["sMaTT"] = dr["sMaTT"].ToString();
+                drUser["sTenTT"] = dr["sTenTT"].ToString();
+                dtUser.Rows.Add(drUser);
+
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand("getChitiet", con);
@@ -159,9 +166,15 @@ namespace btl_lthsk_quanlythuvien.Forms
                 MessageBox.Show("Nhập thông tin phiếu mượn");
                 return;
             }
-            if(dtStudent.Select(string.Format("sMaSV = '{0}'", txtIDSV.Text.ToString())).Length < 1)
+            DataRow[] drStudent = dtStudent.Select(string.Format("sMaSV = '{0}'", txtIDSV.Text.ToString()));
+            if (drStudent.Length < 1)
             {
                 MessageBox.Show("Chưa có thông tin sinh viên trong hệ thống");
+                return;
+            }
+            if(int.Parse(drStudent[0]["solan"].ToString()) > 3)
+            {
+                MessageBox.Show("Sinh viên quá số lần được mượn sách");
                 return;
             }
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -235,10 +248,15 @@ namespace btl_lthsk_quanlythuvien.Forms
                             txtId.Clear();
                             txtIDSV.Clear();
                             dt.Clear();
-                            btnCreate.Text = "Tạo";
                             btnCreate.Tag = null;
                             dateTimePicker1.Value = Convert.ToDateTime(DateTime.Now.Date.ToString());
+                            dtUser.Clear();
+                            DataRow drUser = dtUser.NewRow();
+                            drUser["sMaTT"] = this.user.Iduser;
+                            drUser["sTenTT"] = this.user.Name;
+                            dtUser.Rows.Add(drUser);
                             btnCreate.Enabled = false;
+                            btnCreate.Text = "Tạo";
                             MessageBox.Show("Hoàn thành");
                             return;
                         }
