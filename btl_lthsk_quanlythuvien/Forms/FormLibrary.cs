@@ -84,7 +84,15 @@ namespace btl_lthsk_quanlythuvien.Forms
         }
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            ViewReport.ViewReport view = new ViewReport.ViewReport("Sach", dtBook);
+            DataView dvBook = dtBook.DefaultView;
+            string select = "";
+            if (!string.IsNullOrEmpty(cbTypeSearch.SelectedValue.ToString()))
+            {
+                select += string.Format("sMaL = '{0}'", cbTypeSearch.SelectedValue.ToString());
+            }
+            dvBook.RowFilter = select;
+            DataTable dtTemp = dvBook.ToTable();
+            ViewReport.ViewReport view = new ViewReport.ViewReport("Sach", dtTemp);
             view.Show();
         }
 
@@ -175,6 +183,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                     {
                         id = btnAddBook.Tag.ToString();
                         cmd = new SqlCommand("updateSach", con);
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@mas", SqlDbType.NVarChar).Value = id;
                         cmd.Parameters.Add("@tens", SqlDbType.NVarChar).Value = txtNameBook.Text;
                         cmd.Parameters.Add("@mal", SqlDbType.NVarChar).Value = cbTypeBook.SelectedValue.ToString();

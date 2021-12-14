@@ -134,7 +134,7 @@ Begin
 	CASE 
 		WHEN iTrangthai = 0 THEN N'Khóa'
 		ELSE ''
-	END AS trangthai
+	END AS trangthai, (select count(sMaPhieu) from tblPhieumuon where tblPhieumuon.sMaSV = tblSinhvien.sMaSV and tblPhieumuon.iTrangthai = 0) as solan
 	FROM tblSinhvien ORDER BY sTenSV, sLop ASC
 End
 
