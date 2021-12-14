@@ -26,7 +26,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             {
                 loadStudents();
             }
-            DataView dv = new DataView(dt);
+            DataView dv = dt.DefaultView;
             dgvStudent.DataSource = dv;
         }
 
@@ -55,7 +55,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                         {
                             dt.Rows.Add(new Object[] { txtId.Text, txtName.Text, txtClass.Text, "" });
                             dt.AcceptChanges();
-                            DataView dv = new DataView(dt);
+                            DataView dv = dt.DefaultView;
                             dgvStudent.DataSource = dv;
                             clear();
                         }
@@ -76,9 +76,11 @@ namespace btl_lthsk_quanlythuvien.Forms
                             row["sTenSV"] = txtName.Text;
                             row["sLop"] = txtClass.Text;
                             dt.AcceptChanges();
-                            DataView dv = new DataView(dt);
+                            DataView dv = dt.DefaultView;
                             dgvStudent.DataSource = dv;
+                            btnAdd.Text = "Thêm";
                             clear();
+                                
                         }
                     }
                 }
@@ -131,7 +133,7 @@ namespace btl_lthsk_quanlythuvien.Forms
                             DataRow row = dt.Select(string.Format("sMaSV = '{0}'", txtId.Text))[0];
                             row["trangthai"] = "Khóa";
                             dt.AcceptChanges();
-                            DataView dv = new DataView(dt);
+                            DataView dv = dt.DefaultView;
                             dgvStudent.DataSource = dv;
                             clear();
                         }
@@ -166,6 +168,7 @@ namespace btl_lthsk_quanlythuvien.Forms
             txtId.Clear();
             txtClass.Clear();
             txtName.Clear();
+            btnAdd.Tag = null;
         }
 
         private void loadStudents()
